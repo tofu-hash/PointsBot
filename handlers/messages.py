@@ -80,7 +80,8 @@ async def create_task_cmd_handler(msg: Message, state: FSMContext):
 
 
 async def set_task_description_handler(msg: Message, state: FSMContext):
-    if len(msg.text) <= 100:
+    msg_text = msg.text if msg.text else msg.caption
+    if len(msg_text) <= 100:
         photo_id = '"%s"' % msg.photo[-1].file_id if msg.photo else 'NULL'
         execute(
             ('INSERT INTO tasks '
