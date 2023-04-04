@@ -5,9 +5,10 @@ from handlers.init import *
 dp.register_message_handler(start_cmd_handler, commands=['start'], state='*')
 dp.register_message_handler(help_cmd_handler, commands=['help'], state='*')
 dp.register_message_handler(get_sticker_id_handler, content_types=['sticker'], state='*')
-dp.register_message_handler(stats_cmd_handler, commands=['stats'], state='*')
-dp.register_message_handler(last_task_cmd_handler, commands=['lasttask'], state='*')
+dp.register_message_handler(points_cmd_handler, commands=['points'], state='*')
+dp.register_message_handler(last_task_cmd_handler, commands=['last_task'], state='*')
 dp.register_message_handler(tasks_cmd_handler, commands=['tasks'], state='*')
+dp.register_message_handler(get_all_tasks_cmd_handler, commands=['all_tasks'], state='*')
 
 dp.register_message_handler(view_task_cmd_handler, lambda msg: '/task' in msg.text and len(msg.text) > 5, state='*')
 dp.register_message_handler(create_task_cmd_handler, commands=['task'], state='*')
@@ -25,9 +26,9 @@ async def set_default_commands(dp):
     await dp.bot.set_my_commands(
         [
             BotCommand('task', 'Добавить задачу'),
-            BotCommand('lasttask', 'Последняя задача'),
+            BotCommand('last_task', 'Последняя задача'),
             BotCommand('tasks', 'Просмотреть задачи'),
-            BotCommand('stats', 'Статистика поинтов'),
+            BotCommand('points', 'Статистика поинтов'),
             BotCommand('help', 'Помощь по командам бота'),
             BotCommand('start', 'Перезапуск бота')
         ]

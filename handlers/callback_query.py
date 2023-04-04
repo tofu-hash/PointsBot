@@ -23,13 +23,16 @@ async def complete_task_handler(msg: CallbackQuery, state: FSMContext):
         (int(now_unix_time() - (24 * 60 * 60)),
          msg.from_user.id),
         fetchone=True, commit=False
-    )[0] + 1
+    )[0]
 
     answer = ('🥳 Ты завершил задачу и получил *1* поинт.\n\n'
               '💬 Задача: _«%s»_\n\n'
               '🎯 Твои поинты за последние 24 часа: *%s*') % \
              (task_description, today_points)
-    await msg.message.edit_text(text=answer, parse_mode='markdown')
+    if not msg.message.caption:
+        await msg.message.edit_text(text=answer, parse_mode='markdown')
+    else:
+        await msg.message.edit_caption(caption=answer, parse_mode='markdown')
 
 
 async def delete_task_handler(msg: CallbackQuery):
@@ -49,7 +52,7 @@ async def delete_task_handler(msg: CallbackQuery):
         (int(now_unix_time() - (24 * 60 * 60)),
          msg.from_user.id),
         fetchone=True, commit=False
-    )[0] - task_completed
+    )[0]
 
     execute(
         ('DELETE FROM tasks '
