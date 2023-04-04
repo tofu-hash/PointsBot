@@ -29,6 +29,7 @@ async def set_default_commands(dp):
             BotCommand('last_task', 'Последняя задача'),
             BotCommand('tasks', 'Просмотреть задачи'),
             BotCommand('points', 'Статистика поинтов'),
+            BotCommand('all_tasks', 'Все ваши задачи за всё время'),
             BotCommand('help', 'Помощь по командам бота'),
             BotCommand('start', 'Перезапуск бота')
         ]
